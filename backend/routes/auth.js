@@ -36,6 +36,7 @@ router.post(
                 password: req.body.password,
             });
 
+            // send the details of the user as response for assurance
             res.json(user);
         } catch (error) {
             console.error("Error : " + error.message);
