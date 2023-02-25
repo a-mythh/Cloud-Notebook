@@ -1,6 +1,8 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
+// bcryptjs is used to generate hashed passwords
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
@@ -29,11 +31,15 @@ router.post(
                 });
             }
 
+            // salt is a string which is added at the end of passwords so that it can't be retrieved from rainbow tables
+            const salt = await bcrypt.genSalt(10);
+            const securedPassword = await bcrypt.hash(req.body.password, salt);
+
             // create the user in the database if email is unique
             user = await User.create({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password,
+                password: securedPassword,
             });
 
             // send the details of the user as response for assurance
