@@ -1,8 +1,11 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
-// bcryptjs is used to generate hashed passwords
+// Authentication - bcryptjs is used to generate hashed passwords
 const bcrypt = require("bcryptjs");
+// Authorization - jsonwebtoken is used to provide sessions ids to the users
+const jwt = require("jsonwebtoken");
+const jwt_secret = "I want to make strong passwords"; // how is this going to be strong 😅
 
 const router = express.Router();
 
@@ -42,8 +45,16 @@ router.post(
                 password: securedPassword,
             });
 
-            // send the details of the user as response for assurance
-            res.json(user);
+            // creating payload using user id (unique) stored in database for jwt
+            const userData = {
+                user: {
+                    id: user.id,
+                },
+            };
+            const authToken = jwt.sign(userData, jwt_secret);
+
+            // send the authorization token of the user as response
+            res.json({ authToken });
         } catch (error) {
             console.error("Error : " + error.message);
             res.status(500).send("Some error occurred.");
