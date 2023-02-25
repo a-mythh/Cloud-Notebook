@@ -1,6 +1,8 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
+const fetch_user = require("../middleware/fetch_user");
+
 // Authentication - bcryptjs is used to generate hashed passwords
 const bcrypt = require("bcryptjs");
 // Authorization - jsonwebtoken is used to provide sessions ids to the users
@@ -9,7 +11,7 @@ const jwt_secret = "I want to make strong passwords"; // how is this going to be
 
 const router = express.Router();
 
-// Endpoint - Sign Up | localhost:3000/api/auth/create_user | POST "/api/auth"
+// Endpoint - Sign Up | localhost:3000/api/auth/create_user | POST "/api/auth" - No login required
 router.post(
     "/create_user",
     [
@@ -62,7 +64,7 @@ router.post(
     }
 );
 
-// Endpoint - Login | localhost:3000/api/auth/login | POST "/api/auth"
+// Endpoint - Login | localhost:3000/api/auth/login | POST "/api/auth" - No login required
 router.post(
     "/login",
     [
@@ -119,5 +121,22 @@ router.post(
         }
     }
 );
+
+// Endpoint - Get User Data | localhost:3000/api/auth/get_user | POST "/api/auth" - Login required
+router.post("/get_user", fetch_user, async (req, res) => {
+    // try-catch block for other errors if there are any
+    try {
+        // get the user ID from the req as it was decoded by the middleware fetch_user
+        const userID = req.user.id;
+
+        // get the user details using user ID from the database except the password
+        const userDetails = await User.findById(userID).select("-password");
+
+        res.send(userDetails);
+    } catch (error) {
+        console.error("Error : " + error.message);
+        res.status(500).send("Internal Server Error.");
+    }
+});
 
 module.exports = router;
