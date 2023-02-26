@@ -126,4 +126,30 @@ router.put(
     }
 );
 
+// Endpoint - Delete a note | localhost:5000/api/notes/delete_note/userID | DELETE "/api/notes" - Login required
+router.delete("/delete_note/:id", fetch_user, async (req, res) => {
+    // try-catch block for other errors if there are any
+    try {
+        // find the note to be deleted
+        let note = await Notes.findById(req.params.id);
+        if (!note) {
+            return res.status(404).send("Not Found");
+        }
+
+        // check if the user deleting the note is the actual author of that note
+        if (note.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+
+        // find the note in the database and update it
+        note = await Notes.findByIdAndDelete(req.params.id);
+
+        // send a success message and the deleted note as response for assurance
+        res.json({ Success: "Note deleted", note });
+    } catch (error) {
+        console.error("Error : " + error.message);
+        res.status(500).send("Internal Server Error.");
+    }
+});
+
 module.exports = router;
