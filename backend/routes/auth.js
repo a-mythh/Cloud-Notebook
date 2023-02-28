@@ -67,6 +67,7 @@ router.post(
 // Endpoint - Login | localhost:3000/api/auth/login | POST "/api/auth" - No login required
 router.post(
     "/login",
+    // check if the email is valid and password is entered using express-validator
     [
         body("email", "Enter a valid email").isEmail(),
         body("password", "Password cannot be empty").exists(),
