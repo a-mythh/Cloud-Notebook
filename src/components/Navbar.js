@@ -1,7 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+    // get the page location
+    let location = useLocation();
+    useEffect(() => {}, [location]);
+
     return (
         <div>
             <nav
@@ -30,7 +34,11 @@ const Navbar = () => {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link
-                                    className="nav-link active"
+                                    className={`nav-link ${
+                                        location.pathname === "/"
+                                            ? "active"
+                                            : ""
+                                    }`}
                                     aria-current="page"
                                     to="/"
                                 >
@@ -38,7 +46,14 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/about">
+                                <Link
+                                    className={`nav-link ${
+                                        location.pathname === "/about"
+                                            ? "active"
+                                            : ""
+                                    }`}
+                                    to="/about"
+                                >
                                     About
                                 </Link>
                             </li>
