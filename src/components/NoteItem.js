@@ -19,14 +19,22 @@ const NoteItem = (props) => {
                         cumque quos consequatur nam unde eum atque libero
                         corrupti exercitationem. Numquam.
                     </p>
-                    <a href="/" className="btn btn-primary mx-3">
-                        Edit
-                    </a>
-                    <a href="/" className="btn btn-primary">
-                        Delete
-                    </a>
+                    <span
+                        className="btn btn-outline-warning btn-sm mx-3"
+                        style={{ cursor: "default" }}
+                    >
+                        {note.tag}
+                    </span>
                 </div>
-                <div className="card-footer text-muted">{note.date}</div>
+                <div className="card-footer text-muted">
+                    <div className="d-flex justify-content-between">
+                        <span>{note.date}</span>
+                        <span>
+                            <i className="fa-solid fa-pen-to-square mx-2"></i>
+                            <i className="fa-solid fa-trash mx-1"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     );

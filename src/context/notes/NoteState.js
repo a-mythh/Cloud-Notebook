@@ -5,7 +5,7 @@ const NoteState = (props) => {
     // declare a state here for use in other components
     const n1 = [
         {
-            _id: "63fb6968fd62e3aee296be3d",
+            _id: "63fb6968fd62e3aee2196be3d",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -14,7 +14,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "64168e54ccf9365885f1e83b",
+            _id: "64168e514ccf9365885f1e83b",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -23,7 +23,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "63fb6968fd62e3aee296be3d",
+            _id: "63fb6968f2d62e3aee296be3d",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -32,7 +32,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "64168e54ccf9365885f1e83b",
+            _id: "64168e54cc3f9365885f1e83b",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -41,7 +41,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "63fb6968fd62e3aee296be3d",
+            _id: "63fb6968fd562e3aee296be3d",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -50,7 +50,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "64168e54ccf9365885f1e83b",
+            _id: "64168e54cc2f9365885f1e83b",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -59,7 +59,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "63fb6968fd62e3aee296be3d",
+            _id: "63fb6968f3d62e3aee296be3d",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -68,7 +68,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "64168e54ccf9365885f1e83b",
+            _id: "64168e54ccf93645885f1e83b",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -77,7 +77,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "63fb6968fd62e3aee296be3d",
+            _id: "63fb6968fd62e312aee296be3d",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -86,7 +86,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "64168e54ccf9365885f1e83b",
+            _id: "64168e54ccf93654885f1e83b",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -95,7 +95,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "63fb6968fd62e3aee296be3d",
+            _id: "63fb6968fd62e3a1ee296be3d",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
@@ -104,7 +104,7 @@ const NoteState = (props) => {
             __v: 0,
         },
         {
-            _id: "64168e54ccf9365885f1e83b",
+            _id: "64168e54ccf93625885f1e83b",
             user: "63fa79172f57d373bbff175f",
             title: "What is happening?",
             description: "We will find out soon what is up with you.",
