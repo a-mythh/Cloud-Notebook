@@ -116,21 +116,30 @@ const NoteState = (props) => {
 
     const [notes, setNotes] = useState(n1);
 
-    // update the values using a function like this
-    /*
-    const update = () => {
-        setTimeout(() => {
-            setState({
-                name: "Amita",
-                class: "6B",
-            });
-        }, 1000);
+    // Add a Note
+    const addNote = (title, description, tag) => {
+        // TODO - api call
+        const note = {
+            _id: "64168e54ccf936125885f1e83b",
+            user: "63fa79172f57d373bbff175f",
+            title: title,
+            description: description,
+            tag: tag,
+            date: "2023-03-19T04:15:51.200Z",
+            __v: 0,
+        };
+        setNotes(notes.concat(note));
     };
-    */
+
+    // Delete a Note
+    const deleteNote = () => {};
+
+    // Edit a Note
+    const editNote = () => {};
 
     // pass the state and update function as one object in value attribute
     return (
-        <NoteContext.Provider value={{ notes, setNotes }}>
+        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
             {props.children}
         </NoteContext.Provider>
     );
