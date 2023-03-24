@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import noteContext from "../context/notes/noteContext";
 
 const NoteItem = (props) => {
-    const { note } = props;
+    const { note, updateNote } = props;
 
     const { deleteNote } = useContext(noteContext);
 
@@ -24,7 +24,12 @@ const NoteItem = (props) => {
                     <div className="d-flex justify-content-between">
                         <span>{note.date}</span>
                         <span>
-                            <i className="fa-solid fa-pen-to-square mx-2"></i>
+                            <i
+                                className="fa-solid fa-pen-to-square mx-2"
+                                onClick={() => {
+                                    updateNote(note);
+                                }}
+                            ></i>
                             <i
                                 className="fa-solid fa-trash mx-1"
                                 onClick={() => {
