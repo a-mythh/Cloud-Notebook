@@ -10,6 +10,7 @@ const Notes = () => {
     // fetch all the notes
     useEffect(() => {
         getNotes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
