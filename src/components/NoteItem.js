@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import noteContext from "../context/notes/noteContext";
 
 const NoteItem = (props) => {
     const { note } = props;
+
+    const { deleteNote } = useContext(noteContext);
 
     return (
         <div className="col-md-4">
@@ -9,16 +12,7 @@ const NoteItem = (props) => {
                 <div className="card-header">Note #1</div>
                 <div className="card-body">
                     <h5 className="card-title">{note.title}</h5>
-                    <p className="card-text">
-                        {note.description} Lorem ipsum, dolor sit amet
-                        consectetur adipisicing elit. Amet doloremque iste unde
-                        libero dicta inventore sequi hic, debitis et nihil
-                        minima cumque accusamus aut veniam consectetur dolores
-                        laboriosam. Ipsum iure itaque commodi autem. Cumque
-                        deleniti deserunt suscipit. Necessitatibus voluptates
-                        cumque quos consequatur nam unde eum atque libero
-                        corrupti exercitationem. Numquam.
-                    </p>
+                    <p className="card-text">{note.description}</p>
                     <span
                         className="btn btn-outline-warning btn-sm mx-3"
                         style={{ cursor: "default" }}
@@ -31,7 +25,12 @@ const NoteItem = (props) => {
                         <span>{note.date}</span>
                         <span>
                             <i className="fa-solid fa-pen-to-square mx-2"></i>
-                            <i className="fa-solid fa-trash mx-1"></i>
+                            <i
+                                className="fa-solid fa-trash mx-1"
+                                onClick={() => {
+                                    deleteNote(note._id);
+                                }}
+                            ></i>
                         </span>
                     </div>
                 </div>

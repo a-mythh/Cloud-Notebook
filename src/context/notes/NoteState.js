@@ -2,123 +2,45 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-    // declare a state here for use in other components
-    const n1 = [
-        {
-            _id: "63fb6968fd62e3aee2196be3d",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-02-26T14:09:50.393Z",
-            __v: 0,
-        },
-        {
-            _id: "64168e514ccf9365885f1e83b",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-03-19T04:15:51.200Z",
-            __v: 0,
-        },
-        {
-            _id: "63fb6968f2d62e3aee296be3d",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-02-26T14:09:50.393Z",
-            __v: 0,
-        },
-        {
-            _id: "64168e54cc3f9365885f1e83b",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-03-19T04:15:51.200Z",
-            __v: 0,
-        },
-        {
-            _id: "63fb6968fd562e3aee296be3d",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-02-26T14:09:50.393Z",
-            __v: 0,
-        },
-        {
-            _id: "64168e54cc2f9365885f1e83b",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-03-19T04:15:51.200Z",
-            __v: 0,
-        },
-        {
-            _id: "63fb6968f3d62e3aee296be3d",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-02-26T14:09:50.393Z",
-            __v: 0,
-        },
-        {
-            _id: "64168e54ccf93645885f1e83b",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-03-19T04:15:51.200Z",
-            __v: 0,
-        },
-        {
-            _id: "63fb6968fd62e312aee296be3d",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-02-26T14:09:50.393Z",
-            __v: 0,
-        },
-        {
-            _id: "64168e54ccf93654885f1e83b",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-03-19T04:15:51.200Z",
-            __v: 0,
-        },
-        {
-            _id: "63fb6968fd62e3a1ee296be3d",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-02-26T14:09:50.393Z",
-            __v: 0,
-        },
-        {
-            _id: "64168e54ccf93625885f1e83b",
-            user: "63fa79172f57d373bbff175f",
-            title: "What is happening?",
-            description: "We will find out soon what is up with you.",
-            tag: "Suspicision",
-            date: "2023-03-19T04:15:51.200Z",
-            __v: 0,
-        },
-    ];
+    const host = "http://localhost:5000";
 
+    // declare a state here for use in other components
+    const n1 = [];
     const [notes, setNotes] = useState(n1);
 
+    // Get all Notes
+    const getNotes = async () => {
+        // API call
+        const response = await fetch(`${host}/api/notes/fetch_all_notes`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token":
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmYTc5MTcyZjU3ZDM3M2JiZmYxNzVmIn0sImlhdCI6MTY3NzM1OTM4M30.9EmZjalormEVzwsW1HHRFrV57ifoc5djXqKtmnT_fsM",
+            },
+        });
+
+        const json = await response.json();
+        console.log(json);
+
+        setNotes(json);
+    };
+
     // Add a Note
-    const addNote = (title, description, tag) => {
-        // TODO - api call
+    const addNote = async (title, description, tag) => {
+        // API call
+        const response = await fetch(`${host}/api/notes/add_note`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token":
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmYTc5MTcyZjU3ZDM3M2JiZmYxNzVmIn0sImlhdCI6MTY3NzM1OTM4M30.9EmZjalormEVzwsW1HHRFrV57ifoc5djXqKtmnT_fsM",
+            },
+            body: JSON.stringify({ title, description, tag }),
+        });
+
+        const json = await response.json();
+
         const note = {
             _id: "64168e54ccf936125885f1e83b",
             user: "63fa79172f57d373bbff175f",
@@ -132,14 +54,44 @@ const NoteState = (props) => {
     };
 
     // Delete a Note
-    const deleteNote = () => {};
+    const deleteNote = (_id) => {
+        // TODO - api call
+        const newNotes = notes.filter((note) => {
+            return note._id !== _id;
+        });
+        setNotes(newNotes);
+    };
 
     // Edit a Note
-    const editNote = () => {};
+    const editNote = async (_id, title, description, tag) => {
+        // API call
+        const response = await fetch(`${host}/api/notes/update_note/${_id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token":
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNmYTc5MTcyZjU3ZDM3M2JiZmYxNzVmIn0sImlhdCI6MTY3NzM1OTM4M30.9EmZjalormEVzwsW1HHRFrV57ifoc5djXqKtmnT_fsM",
+            },
+            body: JSON.stringify({ title, description, tag }),
+        });
+
+        const json = await response.json();
+
+        for (let i = 0; i < notes.length; i++) {
+            const note = notes[i];
+            if (note._id === _id) {
+                note.title = title;
+                note.description = description;
+                note.tag = tag;
+            }
+        }
+    };
 
     // pass the state and update function as one object in value attribute
     return (
-        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
+        <NoteContext.Provider
+            value={{ notes, addNote, deleteNote, editNote, getNotes }}
+        >
             {props.children}
         </NoteContext.Provider>
     );
