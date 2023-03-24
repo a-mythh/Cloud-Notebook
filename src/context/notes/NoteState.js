@@ -91,14 +91,21 @@ const NoteState = (props) => {
         const json = await response.json();
         console.log(json);
 
-        for (let i = 0; i < notes.length; i++) {
-            const note = notes[i];
+        // make a deep copy of notes to use in UI
+        let newNotes = JSON.parse(JSON.stringify(notes));
+
+        // update note in the UI
+        for (let i = 0; i < newNotes.length; i++) {
+            const note = newNotes[i];
             if (note._id === _id) {
-                note.title = title;
-                note.description = description;
-                note.tag = tag;
+                newNotes[i].title = title;
+                newNotes[i].description = description;
+                newNotes[i].tag = tag;
+                break;
             }
         }
+        console.log(newNotes);
+        setNotes(newNotes);
     };
 
     // pass the state and update function as one object in value attribute

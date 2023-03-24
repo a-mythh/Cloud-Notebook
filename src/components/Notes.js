@@ -5,7 +5,7 @@ import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
 
 const Notes = () => {
-    const { notes, getNotes } = useContext(noteContext);
+    const { notes, getNotes, editNote } = useContext(noteContext);
 
     // fetch all the notes
     useEffect(() => {
@@ -13,30 +13,37 @@ const Notes = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // make a reference for the edit button
+    // make a reference for the edit button and close button
     const ref = useRef(null);
+    const refClose = useRef(null);
 
     // const { addNote } = useContext(noteContext);
     const [note, setNote] = useState({
+        id: "",
         editTitle: "",
         editDescription: "",
         editTag: "",
     });
 
+    // to show the data of the note to edit in the modal
     const updateNote = (currentNote) => {
         ref.current.click();
         setNote({
+            id: currentNote._id,
             editTitle: currentNote.title,
             editDescription: currentNote.description,
             editTag: currentNote.tag,
         });
     };
 
+    // when save changes button is clicked
     const handleClick = (e) => {
-        e.preventDefault();
-        console.log(note);
+        editNote(note.id, note.editTitle, note.editDescription, note.editTag);
+        console.log("Updating note : " + note);
+        refClose.current.click();
     };
 
+    // when anything in title, description or tag is changed
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value });
     };
@@ -136,6 +143,7 @@ const Notes = () => {
                         <div className="modal-footer">
                             <button
                                 type="button"
+                                ref={refClose}
                                 className="btn btn-secondary"
                                 data-bs-dismiss="modal"
                             >
