@@ -73,6 +73,9 @@ router.post(
         body("password", "Password cannot be empty").exists(),
     ],
     async (req, res) => {
+        // success - if user is able to login or not
+        let success = false;
+
         // if there are errors in the data entered then return Bad request
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -89,7 +92,8 @@ router.post(
             // show error if user does not exist in database
             if (!user) {
                 return res.status(400).json({
-                    error: "Please login valid credentials",
+                    success,
+                    error: "Please login with valid credentials (Invalid Email)",
                 });
             }
 
@@ -102,7 +106,8 @@ router.post(
             // show error if incorrect password is entered
             if (!comparePassword) {
                 return res.status(400).json({
-                    error: "Please login valid credentials",
+                    success,
+                    error: "Please login with valid credentials (Invalid Password)",
                 });
             }
 
@@ -113,9 +118,10 @@ router.post(
                 },
             };
             const authToken = jwt.sign(userPayload, jwt_secret);
+            success = true;
 
             // send the authorization token of the user as response
-            res.json({ authToken });
+            res.json({ success, authToken });
         } catch (error) {
             console.error("Error : " + error.message);
             res.status(500).send("Internal Server Error.");
