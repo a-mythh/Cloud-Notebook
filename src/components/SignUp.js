@@ -56,6 +56,7 @@ const SignUp = (props) => {
 
     return (
         <div className="container my-5" style={{ maxWidth: "540px" }}>
+            <h4 className="text-center my-5">Sign Up</h4>
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
                     <div className="input-group-text">

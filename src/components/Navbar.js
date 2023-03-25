@@ -1,10 +1,18 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     // get the page location
     let location = useLocation();
     useEffect(() => {}, [location]);
+
+    let navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
 
     return (
         <div>
@@ -58,22 +66,31 @@ const Navbar = () => {
                                 </Link>
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
-                            <Link
-                                className="btn btn-primary mx-2"
-                                role="button"
-                                to="/login"
+                        {!localStorage.getItem("token") ? (
+                            <form className="d-flex" role="search">
+                                <Link
+                                    className="btn btn-primary mx-2"
+                                    role="button"
+                                    to="/login"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    className="btn btn-primary mx-2"
+                                    role="button"
+                                    to="/signup"
+                                >
+                                    Sign up
+                                </Link>
+                            </form>
+                        ) : (
+                            <button
+                                className="btn btn-primary"
+                                onClick={handleLogout}
                             >
-                                Login
-                            </Link>
-                            <Link
-                                className="btn btn-primary mx-2"
-                                role="button"
-                                to="/signup"
-                            >
-                                Sign up
-                            </Link>
-                        </form>
+                                Logout
+                            </button>
+                        )}
                     </div>
                 </div>
             </nav>

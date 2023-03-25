@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 
 import NoteState from "./context/notes/NoteState";
+import NotFound from "./components/NotFound";
 
 function App() {
     // show alert for various operations
@@ -47,6 +48,7 @@ function App() {
                                 path="signup/*"
                                 element={<SignUp showAlert={showAlert} />}
                             />
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>
                 </BrowserRouter>
