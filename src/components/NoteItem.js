@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import noteContext from "../context/notes/noteContext";
 
 const NoteItem = (props) => {
-    const { note, updateNote } = props;
+    const { note, updateNote, showAlert } = props;
 
     const { deleteNote } = useContext(noteContext);
 
@@ -34,6 +34,10 @@ const NoteItem = (props) => {
                                 className="fa-solid fa-trash mx-1"
                                 onClick={() => {
                                     deleteNote(note._id);
+                                    showAlert(
+                                        "Your note has been deleted",
+                                        "warning"
+                                    );
                                 }}
                             ></i>
                         </span>

@@ -9,7 +9,7 @@ const Navbar = () => {
     return (
         <div>
             <nav
-                className="navbar navbar-dark bg-dark navbar-expand-lg"
+                className="navbar navbar-dark bg-dark navbar-expand-lg sticky-top"
                 style={{ backgroundColor: "blue", color: "green" }}
             >
                 <div className="container-fluid">

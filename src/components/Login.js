@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const host = "http://localhost:5000";
 
-const Login = () => {
+const Login = (props) => {
     const refEmail = useRef(null);
     const refPassword = useRef(null);
 
@@ -32,13 +32,14 @@ const Login = () => {
             // save the authentication token and redirect
             localStorage.setItem("token", json.authToken);
             navigate("/");
+            props.showAlert("You have been logged in.", "success");
         } else {
-            alert(json.error);
+            props.showAlert(json.error, "danger");
         }
     };
 
     return (
-        <div className="">
+        <div className="container my-5" style={{ maxWidth: "540px" }}>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
@@ -51,6 +52,7 @@ const Login = () => {
                         name="email"
                         ref={refEmail}
                         aria-describedby="emailHelp"
+                        required
                     />
                     <div id="emailHelp" className="form-text">
                         We'll never share your email with anyone else.
@@ -69,6 +71,7 @@ const Login = () => {
                         id="password"
                         ref={refPassword}
                         name="password"
+                        required
                     />
                 </div>
                 <div className="mb-3 form-check">

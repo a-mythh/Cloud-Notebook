@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const host = "http://localhost:5000";
 
-const SignUp = () => {
+const SignUp = (props) => {
     const [credentials, setCredentials] = useState({
         name: "",
         email: "",
@@ -41,8 +41,9 @@ const SignUp = () => {
             // save the authentication token and redirect
             localStorage.setItem("token", json.authToken);
             navigate("/");
+            props.showAlert("Created your account.", "success");
         } else {
-            alert(json.error);
+            props.showAlert(json.error, "danger");
         }
     };
 
