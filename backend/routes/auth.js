@@ -15,15 +15,18 @@ const router = express.Router();
 router.post(
     "/create_user",
     [
-        body("name", "Enter a valid name").isLength({ min: 3 }),
+        body("name", "Enter a valid name").isLength({ min: 2 }),
         body("email", "Enter a valid email").isEmail(),
         body("password", "Password length is too short").isLength({ min: 5 }),
     ],
     async (req, res) => {
+        // success - if user is able to sign up or not
+        let success = false;
+
         // if there are errors in the data entered then return Bad request
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ success, errors: errors.array() });
         }
 
         // try-catch block for other errors if there are any
@@ -32,6 +35,7 @@ router.post(
             let user = await User.findOne({ email: req.body.email });
             if (user) {
                 return res.status(400).json({
+                    success,
                     error: "Sorry a user with this email already exists",
                 });
             }
@@ -55,8 +59,9 @@ router.post(
             };
             const authToken = jwt.sign(userData, jwt_secret);
 
+            success = true;
             // send the authorization token of the user as response
-            res.json({ authToken });
+            res.json({ success, authToken });
         } catch (error) {
             console.error("Error : " + error.message);
             res.status(500).send("Internal Server Error.");
