@@ -101,6 +101,8 @@ const Notes = () => {
                                         name="editTitle"
                                         value={note.editTitle}
                                         onChange={onChange}
+                                        minLength={3}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -120,6 +122,8 @@ const Notes = () => {
                                         }}
                                         value={note.editDescription}
                                         onChange={onChange}
+                                        minLength={5}
+                                        required
                                     ></textarea>
                                 </div>
                                 <div className="mb-3">
@@ -153,6 +157,10 @@ const Notes = () => {
                                 type="button"
                                 className="btn btn-primary"
                                 onClick={handleClick}
+                                disabled={
+                                    note.editTitle.length < 3 ||
+                                    note.editDescription.length < 5
+                                }
                             >
                                 Save Changes
                             </button>
@@ -163,6 +171,15 @@ const Notes = () => {
 
             <div className="row my-3">
                 <h4 className="text-center">Your Notes</h4>
+
+                {notes.length === 0 && (
+                    <div className="container my-4">
+                        <h6 className="text-center">
+                            There are no notes here.
+                        </h6>
+                    </div>
+                )}
+
                 {notes.map((note) => {
                     return (
                         <NoteItem
