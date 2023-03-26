@@ -1,0 +1,154 @@
+.body-about {
+    font-family: "Ubuntu", serif;
+    display: grid;
+
+    align-content: center;
+    min-height: 40vh;
+}
+
+.section-about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    width: 75vw;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 12px;
+}
+.image-about {
+    background-color: #12192c;
+    display: flex;
+    border-radius: 12px 0 0 12px;
+}
+.image-about img {
+    height: 50vh;
+    margin: 50px auto;
+}
+.content-about {
+    background-color: #12192c;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0 12px 12px 0;
+    color: #fff;
+}
+.content-about h2 {
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    letter-spacing: 6px;
+    opacity: 0.9;
+    margin-top: 3rem;
+    margin-bottom: 0.2rem;
+}
+.content-about span {
+    height: 1.5px;
+    width: 110px;
+    background: #3a3232;
+    margin: 15px 0;
+}
+.content-about p {
+    padding-bottom: 15px;
+    font-weight: 300;
+    opacity: 0.7;
+    font-size: 20px;
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 1.7;
+    color: #ffffff;
+}
+.links-about {
+    margin: 15px 0;
+}
+.links-about li {
+    border: 2px solid #4158d0;
+    list-style: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 160px;
+    text-align: center;
+}
+.a-about {
+    color: #fff;
+    text-decoration: none;
+}
+.links-about li:hover {
+    border-color: #c850c0;
+}
+
+.vertical-line-about {
+    height: 30px;
+    width: 3px;
+    background: #c850c0;
+    margin: 0 auto;
+}
+.icons-about {
+    display: flex;
+    padding: 15px 0;
+}
+.icons-about li {
+    display: block;
+    padding: 5px;
+    margin: 5px;
+}
+.icons-about li i {
+    font-size: 26px;
+    opacity: 0.8;
+}
+.icons-about li i:hover {
+    color: #c850c0;
+    cursor: pointer;
+}
+
+/*****************/
+
+@media (max-width: 900px) {
+    section {
+        grid-template-columns: 1fr;
+        width: 100%;
+        border-radius: none;
+    }
+    .image-about {
+        height: 100vh;
+        border-radius: none;
+    }
+    .content-about {
+        height: 100vh;
+        border-radius: none;
+    }
+    .content-about h2 {
+        font-size: 20px;
+        margin-top: 50px;
+    }
+    .content-about span {
+        margin: 20px 0;
+    }
+    .content-about p {
+        font-size: 14px;
+    }
+    .a-about {
+        font-size: 14px;
+    }
+    .links-about {
+        margin: 5px 0;
+    }
+    .links-about li {
+        padding: 6px 10px;
+    }
+    .icons-about li i {
+        font-size: 15px;
+    }
+}
+.credit-about {
+    text-align: center;
+    color: #000;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+}
+
+.credit-about a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}

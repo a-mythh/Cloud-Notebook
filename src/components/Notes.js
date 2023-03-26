@@ -1,15 +1,20 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import noteContext from "../context/notes/noteContext";
+import { useNavigate } from "react-router-dom";
 
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
 
-const Notes = () => {
+const Notes = (props) => {
     const { notes, getNotes, editNote } = useContext(noteContext);
+    let navigate = useNavigate();
 
     // fetch all the notes
     useEffect(() => {
-        getNotes();
+        if (localStorage.getItem("token")) getNotes();
+        else {
+            navigate("/login");
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -41,6 +46,7 @@ const Notes = () => {
         editNote(note.id, note.editTitle, note.editDescription, note.editTag);
         console.log("Updating note : " + note);
         refClose.current.click();
+        props.showAlert("Your note has been updated.", "primary");
     };
 
     // when anything in title, description or tag is changed
@@ -50,7 +56,7 @@ const Notes = () => {
 
     return (
         <>
-            <AddNote />
+            <AddNote showAlert={props.showAlert} />
 
             <button
                 type="button"
@@ -101,6 +107,8 @@ const Notes = () => {
                                         name="editTitle"
                                         value={note.editTitle}
                                         onChange={onChange}
+                                        minLength={3}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -120,6 +128,8 @@ const Notes = () => {
                                         }}
                                         value={note.editDescription}
                                         onChange={onChange}
+                                        minLength={5}
+                                        required
                                     ></textarea>
                                 </div>
                                 <div className="mb-3">
@@ -153,6 +163,10 @@ const Notes = () => {
                                 type="button"
                                 className="btn btn-primary"
                                 onClick={handleClick}
+                                disabled={
+                                    note.editTitle.length < 3 ||
+                                    note.editDescription.length < 5
+                                }
                             >
                                 Save Changes
                             </button>
@@ -163,12 +177,22 @@ const Notes = () => {
 
             <div className="row my-3">
                 <h4 className="text-center">Your Notes</h4>
+
+                {notes.length === 0 && (
+                    <div className="container my-4">
+                        <h6 className="text-center">
+                            There are no notes here.
+                        </h6>
+                    </div>
+                )}
+
                 {notes.map((note) => {
                     return (
                         <NoteItem
                             note={note}
                             key={note._id}
                             updateNote={updateNote}
+                            showAlert={props.showAlert}
                         />
                     );
                 })}
